@@ -6,6 +6,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.llmapp.llm.LLMInferenceEngine
+import com.example.llmapp.llm.LLMModelManager
+import com.example.llmapp.llm.ModelDownloadManager
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 
 class MainActivity : AppCompatActivity() {
@@ -15,6 +18,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var submitButton: Button
     private lateinit var outputTextView: TextView
     private lateinit var inferenceManager: LLMInferenceManager
+    private lateinit var modelManager: LLMModelManager
+    private lateinit var inferenceEngine: LLMInferenceEngine
+    private lateinit var downloadManager: ModelDownloadManager
     private val disposables = CompositeDisposable()
     
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +32,10 @@ class MainActivity : AppCompatActivity() {
         submitButton = findViewById(R.id.submitButton)
         outputTextView = findViewById(R.id.outputTextView)
         
-        // Initialize LLM inference manager
+        // Initialize LLM components
+        modelManager = LLMModelManager(this)
+        inferenceEngine = LLMInferenceEngine(this)
+        downloadManager = ModelDownloadManager(this)
         inferenceManager = LLMInferenceManager(this)
         
         // Set up click listener
@@ -87,5 +96,6 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
         disposables.clear()
         inferenceManager.close()
+        inferenceEngine.close()
     }
 }
