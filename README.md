@@ -51,6 +51,23 @@ Models are loaded from the `assets` directory. The implementation assumes:
 2. **Model Execution**: TensorFlow Lite interpreter runs inference
 3. **Output Postprocessing**: Numerical output is converted back to text format
 
+## Frameworks Comparison for Android Deployment
+
+### TensorFlow Lite
+- **Pros**: First-class Android support, extensive documentation, GPU/NPU acceleration, seamless integration
+- **Cons**: May require more memory compared to other solutions
+- **Best for**: Production Android apps with existing TensorFlow workflows
+
+### llama.cpp
+- **Pros**: High performance, cross-platform, extensive model support, low memory footprint
+- **Cons**: Requires C/C++ compilation, Android NDK build complexity
+- **Best for**: Developers who need maximum performance and are comfortable with C/C++ toolchain
+
+### ONNX Runtime
+- **Pros**: Cross-platform support, multi-language, good hardware acceleration
+- **Cons**: Less specific to mobile optimization compared to TensorFlow Lite
+- **Best for**: Apps that need to support multiple model formats or are migrating from different ML frameworks
+
 ## Usage
 
 1. Build and install the Android application
